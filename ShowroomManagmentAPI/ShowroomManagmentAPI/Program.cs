@@ -15,10 +15,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(x => 
-                 x.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+x.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddScoped<IDepartment, DepartmentModel>();
-builder.Services.AddScoped<IRole, RoleModel>();
+builder.Services.AddScoped<IRole, RoleModel>(); 
 builder.Services.AddScoped<IEmployee, EmployeeModel>();
 builder.Services.AddScoped<IAttendance, AttendanceModel>();
 builder.Services.AddScoped<IVehicle, VehicleModel>();
