@@ -11,7 +11,8 @@ namespace ShowroomManagmentAPI.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
-        public DbSet<Vehicle> Vehicles {  get; set; } 
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<VehicleCategory> VehicleCategorys { get; set; }
         public DbSet<Customer> Customers { get; set; } 
         public DbSet<Campaign> Campaign { get; set; } 
         public DbSet<Promotion> Promotions { get; set; }

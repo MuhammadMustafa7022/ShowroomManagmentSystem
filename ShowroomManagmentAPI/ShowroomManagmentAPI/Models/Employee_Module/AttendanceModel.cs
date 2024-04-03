@@ -14,7 +14,7 @@ namespace ShowroomManagmentAPI.Models.Employee_Module
         }
         public async Task<ResponseDTO> GetAttendance()
         {
-           var ResponseDTO = new ResponseDTO();
+            var ResponseDTO = new ResponseDTO();
             try
             {
                 ResponseDTO.Response = await context.Attendances.ToListAsync();
@@ -53,9 +53,9 @@ namespace ShowroomManagmentAPI.Models.Employee_Module
             try
             {
                 var Data = await context.Attendances.Where(x => x.FKEmployeeId == id).FirstOrDefaultAsync();
-                if(Data !=  null)
+                if (Data != null)
                 {
-                ResponseDTO.Response = Data;
+                    ResponseDTO.Response = Data;
                 }
                 else
                 {

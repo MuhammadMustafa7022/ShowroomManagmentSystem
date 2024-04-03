@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowroomManagmentAPI.Data;
 
@@ -11,9 +12,10 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240403215655_Initialize_VehicleCategory")]
+    partial class Initialize_VehicleCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,36 +23,6 @@ namespace ShowroomManagmentAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Attendance", b =>
-                {
-                    b.Property<int>("PkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
-
-                    b.Property<string>("Date")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FKEmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TimeIn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TimeOut")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PkId");
-
-                    b.HasIndex("FKEmployeeId");
-
-                    b.ToTable("Attendances");
-                });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Campaign", b =>
                 {
@@ -326,73 +298,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
-                {
-                    b.Property<int>("ModelId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModelId"), 1L, 1);
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EngineType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FKCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Features")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Manufacturer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mileage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModelName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfileImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Quantity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VIN")
-                        .IsRequired()
-                        .HasMaxLength(17)
-                        .HasColumnType("nvarchar(17)");
-
-                    b.Property<string>("WheelCount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Year")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ModelId");
-
-                    b.HasIndex("FKCategoryId");
-
-                    b.ToTable("Vehicles");
-                });
-
             modelBuilder.Entity("ShowroomManagmentAPI.Data.VehicleCategory", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -412,17 +317,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("VehicleCategorys");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Attendance", b =>
-                {
-                    b.HasOne("ShowroomManagmentAPI.Data.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("FKEmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.CampaignChannelMapping", b =>
@@ -480,17 +374,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
-                {
-                    b.HasOne("ShowroomManagmentAPI.Data.VehicleCategory", "VehicleCategory")
-                        .WithMany()
-                        .HasForeignKey("FKCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("VehicleCategory");
                 });
 #pragma warning restore 612, 618
         }

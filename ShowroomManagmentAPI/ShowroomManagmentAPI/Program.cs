@@ -20,8 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(x =>
 builder.Services.AddScoped<IDepartment, DepartmentModel>();
 builder.Services.AddScoped<IRole, RoleModel>();
 builder.Services.AddScoped<IEmployee, EmployeeModel>();
-builder.Services.AddScoped<IAttendance,AttendanceModel>();
+builder.Services.AddScoped<IAttendance, AttendanceModel>();
 builder.Services.AddScoped<IVehicle, VehicleModel>();
+builder.Services.AddScoped<IVehicleCategory, VehicleCategoryModel>();
 builder.Services.AddScoped<ICustomer, CustomerModel>();
 builder.Services.AddScoped<ICampaign, CampaignModel>();
 builder.Services.AddScoped<IPromotion, PromotionModel>();

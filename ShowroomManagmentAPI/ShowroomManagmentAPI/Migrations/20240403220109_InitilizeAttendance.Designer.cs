@@ -12,7 +12,7 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240402230435_InitilizeAttendance")]
+    [Migration("20240403220109_InitilizeAttendance")]
     partial class InitilizeAttendance
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -330,13 +330,24 @@ namespace ShowroomManagmentAPI.Migrations
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
                 {
-                    b.Property<int>("VehicleId")
+                    b.Property<int>("ModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehicleId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModelId"), 1L, 1);
 
                     b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EngineType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FKCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Features")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -348,7 +359,7 @@ namespace ShowroomManagmentAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Model")
+                    b.Property<string>("ModelName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -369,13 +380,40 @@ namespace ShowroomManagmentAPI.Migrations
                         .HasMaxLength(17)
                         .HasColumnType("nvarchar(17)");
 
+                    b.Property<string>("WheelCount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Year")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("VehicleId");
+                    b.HasKey("ModelId");
+
+                    b.HasIndex("FKCategoryId");
 
                     b.ToTable("Vehicles");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.VehicleCategory", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("VehicleCategorys");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Attendance", b =>
@@ -444,6 +482,17 @@ namespace ShowroomManagmentAPI.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
+                {
+                    b.HasOne("ShowroomManagmentAPI.Data.VehicleCategory", "VehicleCategory")
+                        .WithMany()
+                        .HasForeignKey("FKCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VehicleCategory");
                 });
 #pragma warning restore 612, 618
         }

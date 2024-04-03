@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowroomManagmentAPI.Data;
 
@@ -11,9 +12,10 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240403215934_Initialize_Vehicle")]
+    partial class Initialize_Vehicle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,36 +23,6 @@ namespace ShowroomManagmentAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Attendance", b =>
-                {
-                    b.Property<int>("PkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
-
-                    b.Property<string>("Date")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FKEmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TimeIn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TimeOut")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PkId");
-
-                    b.HasIndex("FKEmployeeId");
-
-                    b.ToTable("Attendances");
-                });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Campaign", b =>
                 {
@@ -412,17 +384,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("VehicleCategorys");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Attendance", b =>
-                {
-                    b.HasOne("ShowroomManagmentAPI.Data.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("FKEmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.CampaignChannelMapping", b =>
