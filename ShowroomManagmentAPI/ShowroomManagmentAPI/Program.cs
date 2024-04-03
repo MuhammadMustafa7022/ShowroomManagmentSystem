@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ShowroomManagmentAPI.Data;
 using ShowroomManagmentAPI.Models;
+using ShowroomManagmentAPI.Models.Employee_Module;
 using ShowroomManagmentAPI.Models.Marketing_Promotion_Module;
 using ShowroomManagmentAPI.Repositories;
 
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(x =>
 builder.Services.AddScoped<IDepartment, DepartmentModel>();
 builder.Services.AddScoped<IRole, RoleModel>();
 builder.Services.AddScoped<IEmployee, EmployeeModel>();
+builder.Services.AddScoped<IAttendance,AttendanceModel>();
 builder.Services.AddScoped<IVehicle, VehicleModel>();
 builder.Services.AddScoped<ICustomer, CustomerModel>();
 builder.Services.AddScoped<ICampaign, CampaignModel>();
