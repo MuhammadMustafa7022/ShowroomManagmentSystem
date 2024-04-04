@@ -4,32 +4,32 @@
 
 namespace ShowroomManagmentAPI.Migrations
 {
-    public partial class InitilizeInspection : Migration
+    public partial class Inialize_OrderItem : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Inspections",
+                name: "OrderItems",
                 columns: table => new
                 {
-                    PkId = table.Column<int>(type: "int", nullable: false)
+                    OrderItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    InspectionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Result = table.Column<bool>(type: "bit", nullable: false),
-                    FKInspectorId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FkSaleOrderID = table.Column<int>(type: "int", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inspections", x => x.PkId);
+                    table.PrimaryKey("PK_OrderItems", x => x.OrderItemId);
                     table.ForeignKey(
-                        name: "FK_Inspections_Inspectors_FKInspectorId",
-                        column: x => x.FKInspectorId,
-                        principalTable: "Inspectors",
-                        principalColumn: "PkId",
+                        name: "FK_OrderItems_SaleOrders_FkSaleOrderID",
+                        column: x => x.FkSaleOrderID,
+                        principalTable: "SaleOrders",
+                        principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inspections_Vehicles_VehicleId",
+                        name: "FK_OrderItems_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "VehiicleId",
@@ -37,20 +37,20 @@ namespace ShowroomManagmentAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inspections_FKInspectorId",
-                table: "Inspections",
-                column: "FKInspectorId");
+                name: "IX_OrderItems_FkSaleOrderID",
+                table: "OrderItems",
+                column: "FkSaleOrderID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inspections_VehicleId",
-                table: "Inspections",
+                name: "IX_OrderItems_VehicleId",
+                table: "OrderItems",
                 column: "VehicleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Inspections");
+                name: "OrderItems");
         }
     }
 }

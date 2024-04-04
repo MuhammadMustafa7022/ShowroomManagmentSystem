@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowroomManagmentAPI.Data;
 
@@ -11,9 +12,10 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240404191312_Inialize_saleOrder")]
+    partial class Inialize_saleOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -327,37 +329,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("Inspectors");
                 });
 
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.OrderItem", b =>
-                {
-                    b.Property<int>("OrderItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"), 1L, 1);
-
-                    b.Property<int>("FkSaleOrderID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Quantity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderItemId");
-
-                    b.HasIndex("FkSaleOrderID");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("OrderItems");
-                });
-
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Promotion", b =>
                 {
                     b.Property<int>("PromotionID")
@@ -632,25 +603,6 @@ namespace ShowroomManagmentAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.OrderItem", b =>
-                {
-                    b.HasOne("ShowroomManagmentAPI.Data.SalesOrder", "SalesOrder")
-                        .WithMany()
-                        .HasForeignKey("FkSaleOrderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShowroomManagmentAPI.Data.Vehicle", "Vehicle")
-                        .WithMany()
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SalesOrder");
-
-                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.SalesOrder", b =>

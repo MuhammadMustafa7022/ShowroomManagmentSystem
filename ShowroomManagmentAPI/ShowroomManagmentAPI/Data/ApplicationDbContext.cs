@@ -22,5 +22,7 @@ namespace ShowroomManagmentAPI.Data
         public DbSet<CampaignCustomerSegmentMapping> CampaignCustomerSegmentMappings { get; set; }
         public DbSet<Inspector> Inspectors { get; set; }
         public DbSet<Inspection> Inspections { get; set; }
+        public DbSet<SalesOrder> SaleOrders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }
