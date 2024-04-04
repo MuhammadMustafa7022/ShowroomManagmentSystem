@@ -85,7 +85,7 @@ namespace ShowroomManagmentAPI.Models
 
             try
             {
-                var Data = await Context.Vehicles.Where(x => x.ModelId == Id).FirstOrDefaultAsync();
+                var Data = await Context.Vehicles.Where(x => x.VehiicleId == Id).FirstOrDefaultAsync();
                 if (Data != null)
                 {
                     Response.Response = Data;
@@ -109,7 +109,7 @@ namespace ShowroomManagmentAPI.Models
 
             try
             {
-                var Data = await Context.Vehicles.Where(x => x.ModelId == Id).FirstOrDefaultAsync();
+                var Data = await Context.Vehicles.Where(x => x.VehiicleId == Id).FirstOrDefaultAsync();
                 var FileName = Data.ProfileImagePath;
                 var path = Path.Combine(WebHostEnvironment.WebRootPath, FileName);
                 if (File.Exists(path))
@@ -145,7 +145,7 @@ namespace ShowroomManagmentAPI.Models
 
             try
             {
-                var Data = await Context.Vehicles.Where(x => x.ModelId == VehicleDTO.ModelId).FirstOrDefaultAsync();
+                var Data = await Context.Vehicles.Where(x => x.VehiicleId == VehicleDTO.VehiicleId).FirstOrDefaultAsync();
                 if (Data != null)
                 {
                     if (VehicleDTO.ProfileImagePath != null)
@@ -162,7 +162,7 @@ namespace ShowroomManagmentAPI.Models
 
                 var Vehicle = new Vehicle()
                 {
-                    ModelId = VehicleDTO.ModelId,
+                    VehiicleId = VehicleDTO.VehiicleId,
                     ModelName = VehicleDTO.ModelName,
                     Manufacturer = VehicleDTO.Manufacturer,
                     Year = VehicleDTO.Year,

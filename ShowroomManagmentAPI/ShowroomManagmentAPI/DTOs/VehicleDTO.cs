@@ -6,7 +6,7 @@ namespace ShowroomManagmentAPI.DTOs
 {
     public class VehicleDTO
     {
-        public int ModelId { get; set; }
+        public int VehiicleId { get; set; }
         public string ModelName { get; set; }
         public string Manufacturer { get; set; }
         public string Year { get; set; }

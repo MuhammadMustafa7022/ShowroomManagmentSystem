@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowroomManagmentAPI.Data;
 
@@ -11,9 +12,10 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240403232500_InitilizeInspector")]
+    partial class InitilizeInspector
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,7 +205,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("CustomerSegments");
                 });
 
-
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Department", b =>
                 {
                     b.Property<int>("PkId")
@@ -270,36 +271,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.HasIndex("FKRole");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Inspection", b =>
-                {
-                    b.Property<int>("PkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
-
-                    b.Property<int>("FKInspectorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("InspectionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Result")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PkId");
-
-                    b.HasIndex("FKInspectorId");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("Inspections");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Inspector", b =>
@@ -385,11 +356,11 @@ namespace ShowroomManagmentAPI.Migrations
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
                 {
-                    b.Property<int>("VehiicleId")
+                    b.Property<int>("ModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehiicleId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModelId"), 1L, 1);
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -443,7 +414,7 @@ namespace ShowroomManagmentAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("VehiicleId");
+                    b.HasKey("ModelId");
 
                     b.HasIndex("FKCategoryId");
 
@@ -520,7 +491,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.Navigation("CustomerSegment");
                 });
 
-
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Employee", b =>
                 {
                     b.HasOne("ShowroomManagmentAPI.Data.Department", "Department")
@@ -538,25 +508,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Inspection", b =>
-                {
-                    b.HasOne("ShowroomManagmentAPI.Data.Inspector", "Inspector")
-                        .WithMany()
-                        .HasForeignKey("FKInspectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShowroomManagmentAPI.Data.Vehicle", "Vehicle")
-                        .WithMany()
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Inspector");
-
-                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Inspector", b =>

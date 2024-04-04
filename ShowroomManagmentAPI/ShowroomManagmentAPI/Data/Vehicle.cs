@@ -6,7 +6,7 @@ namespace ShowroomManagmentAPI.Data
     public class Vehicle
     {
         [Key]
-        public int ModelId { get; set; }
+        public int VehiicleId { get; set; }
         public string ModelName { get; set; }
         public string Manufacturer {  get; set; }
         public string Year { get; set;}

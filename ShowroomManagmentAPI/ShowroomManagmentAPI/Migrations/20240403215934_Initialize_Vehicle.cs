@@ -12,7 +12,7 @@ namespace ShowroomManagmentAPI.Migrations
                 name: "Vehicles",
                 columns: table => new
                 {
-                    ModelId = table.Column<int>(type: "int", nullable: false)
+                    VehiicleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ModelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -30,7 +30,7 @@ namespace ShowroomManagmentAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vehicles", x => x.ModelId);
+                    table.PrimaryKey("PK_Vehicles", x => x.VehiicleId);
                     table.ForeignKey(
                         name: "FK_Vehicles_VehicleCategorys_FKCategoryId",
                         column: x => x.FKCategoryId,

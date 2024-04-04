@@ -3,6 +3,8 @@ using ShowroomManagmentAPI.Data;
 using ShowroomManagmentAPI.Models;
 using ShowroomManagmentAPI.Models.Employee_Module;
 using ShowroomManagmentAPI.Models.Marketing_Promotion_Module;
+using ShowroomManagmentAPI.Models.Quality_Assurance_Module;
+using ShowroomManagmentAPI.Models.Quality_xyz_Module;
 using ShowroomManagmentAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +32,8 @@ builder.Services.AddScoped<IChannel, ChannelModel>();
 builder.Services.AddScoped<ICustomer_segment, CustomerSegmentModel>();
 builder.Services.AddScoped<ICampaignChannelMapping, CampaignChannelMappingModel>();
 builder.Services.AddScoped<ICampaignCustomerSegmentMapping, CampaignCustomerSegmentMappingModel>();
+builder.Services.AddScoped<IInspector, InspectorModel>();
+builder.Services.AddScoped<IInspection,InspectionModel>();
 
 var app = builder.Build();
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowroomManagmentAPI.Data;
 
@@ -11,9 +12,10 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240404000509_InitilizeInspection")]
+    partial class InitilizeInspection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,7 +205,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("CustomerSegments");
                 });
 
-
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Department", b =>
                 {
                     b.Property<int>("PkId")
@@ -385,11 +386,11 @@ namespace ShowroomManagmentAPI.Migrations
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
                 {
-                    b.Property<int>("VehiicleId")
+                    b.Property<int>("ModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehiicleId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModelId"), 1L, 1);
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -443,7 +444,7 @@ namespace ShowroomManagmentAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("VehiicleId");
+                    b.HasKey("ModelId");
 
                     b.HasIndex("FKCategoryId");
 
@@ -519,7 +520,6 @@ namespace ShowroomManagmentAPI.Migrations
 
                     b.Navigation("CustomerSegment");
                 });
-
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Employee", b =>
                 {
