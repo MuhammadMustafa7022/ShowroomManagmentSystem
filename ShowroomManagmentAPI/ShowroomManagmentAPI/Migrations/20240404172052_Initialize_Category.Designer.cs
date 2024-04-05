@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowroomManagmentAPI.Data;
 
@@ -11,9 +12,10 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240404172052_Initialize_Category")]
+    partial class Initialize_Category
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,28 +264,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Product", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
-
-                    b.Property<string>("Discription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FKCategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId");
-
-                    b.HasIndex("FKCategoryId");
-
-                    b.ToTable("Products");
-                });
-
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Promotion", b =>
                 {
                     b.Property<int>("PromotionID")
@@ -315,39 +295,7 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("Promotions");
                 });
 
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.PurchaseOrderItem", b =>
-                {
-                    b.Property<int>("ItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemId"), 1L, 1);
-
-                    b.Property<int>("FKPurchaseOrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FkProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Qty")
-                        .HasColumnType("int");
-
-                    b.Property<float>("TotalPrice")
-                        .HasColumnType("real");
-
-                    b.Property<float>("UnitPrice")
-                        .HasColumnType("real");
-
-                    b.HasKey("ItemId");
-
-                    b.HasIndex("FKPurchaseOrderId");
-
-                    b.HasIndex("FkProductId");
-
-                    b.ToTable("PurchaseOrderItems");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.PurchaseOrdr", b =>
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.PurchaseOrder", b =>
                 {
                     b.Property<int>("PurchaseOrderId")
                         .ValueGeneratedOnAdd()
@@ -365,14 +313,17 @@ namespace ShowroomManagmentAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("PurchaseOrderId");
 
-                    b.HasIndex("FKSupplierId");
+                    b.HasIndex("SupplierId");
 
-                    b.ToTable("PurchaseOrdrs");
+                    b.ToTable("PurchaseOrders");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Role", b =>
@@ -535,41 +486,11 @@ namespace ShowroomManagmentAPI.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.Product", b =>
-                {
-                    b.HasOne("ShowroomManagmentAPI.Data.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("FKCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.PurchaseOrderItem", b =>
-                {
-                    b.HasOne("ShowroomManagmentAPI.Data.PurchaseOrdr", "PurchaseOrdr")
-                        .WithMany()
-                        .HasForeignKey("FKPurchaseOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShowroomManagmentAPI.Data.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("FkProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("PurchaseOrdr");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.PurchaseOrdr", b =>
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.PurchaseOrder", b =>
                 {
                     b.HasOne("ShowroomManagmentAPI.Data.Supplier", "Supplier")
                         .WithMany()
-                        .HasForeignKey("FKSupplierId")
+                        .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

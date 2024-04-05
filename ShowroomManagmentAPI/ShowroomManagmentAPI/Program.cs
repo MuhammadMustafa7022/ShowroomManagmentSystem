@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ShowroomManagmentAPI.Data;
 using ShowroomManagmentAPI.Models;
 using ShowroomManagmentAPI.Models.Marketing_Promotion_Module;
+using ShowroomManagmentAPI.Models.Supplier_Module;
 using ShowroomManagmentAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,19 @@ builder.Services.AddScoped<IChannel, ChannelModel>();
 builder.Services.AddScoped<ICustomer_segment, CustomerSegmentModel>();
 builder.Services.AddScoped<ICampaignChannelMapping, CampaignChannelMappingModel>();
 builder.Services.AddScoped<ICampaignCustomerSegmentMapping, CampaignCustomerSegmentMappingModel>();
+builder.Services.AddScoped<ISupplier, SupplierModel>();
+builder.Services.AddScoped<IPurchaseOrdr, PurchaseOrdrModel>();
+builder.Services.AddScoped<ICategory, CategoryModel>();
+builder.Services.AddScoped<IProduct, ProductModel>();
+builder.Services.AddScoped<IPurchaseOrderItem, PurchaseOrderItemModel>();
+
+
+
+
+
+
+
+
 
 var app = builder.Build();
 
