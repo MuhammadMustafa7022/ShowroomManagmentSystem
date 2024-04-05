@@ -12,7 +12,7 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240405150420_Initialize_PurchaseOrderItem")]
+    [Migration("20240405211624_Initialize_PurchaseOrderItem")]
     partial class Initialize_PurchaseOrderItem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,36 @@ namespace ShowroomManagmentAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Attendance", b =>
+                {
+                    b.Property<int>("PkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FKEmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TimeIn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TimeOut")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PkId");
+
+                    b.HasIndex("FKEmployeeId");
+
+                    b.ToTable("Attendances");
+                });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Campaign", b =>
                 {
@@ -196,6 +226,40 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("CustomerSegments");
                 });
 
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Defects", b =>
+                {
+                    b.Property<int>("DefectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DefectId"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FKInspectionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Severity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DefectId");
+
+                    b.HasIndex("FKInspectionId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("Defects");
+                });
+
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Department", b =>
                 {
                     b.Property<int>("PkId")
@@ -262,6 +326,93 @@ namespace ShowroomManagmentAPI.Migrations
                     b.HasIndex("FKRole");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Inspection", b =>
+                {
+                    b.Property<int>("PkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
+
+                    b.Property<int>("FKInspectorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InspectionType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Result")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PkId");
+
+                    b.HasIndex("FKInspectorId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("Inspections");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Inspector", b =>
+                {
+                    b.Property<int>("PkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FkDepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PkId");
+
+                    b.HasIndex("FkDepartmentId");
+
+                    b.ToTable("Inspectors");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.OrderItem", b =>
+                {
+                    b.Property<int>("OrderItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"), 1L, 1);
+
+                    b.Property<int>("FkSaleOrderID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Price")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderItemId");
+
+                    b.HasIndex("FkSaleOrderID");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Product", b =>
@@ -401,6 +552,41 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.SalesOrder", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
+
+                    b.Property<int>("FkCustomerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FkEmpolyeeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OrderDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TotalAmount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("FkCustomerID");
+
+                    b.HasIndex("FkEmpolyeeID");
+
+                    b.ToTable("SaleOrders");
+                });
+
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Supplier", b =>
                 {
                     b.Property<int>("SupplierId")
@@ -432,13 +618,24 @@ namespace ShowroomManagmentAPI.Migrations
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
                 {
-                    b.Property<int>("VehicleId")
+                    b.Property<int>("VehiicleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehicleId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehiicleId"), 1L, 1);
 
                     b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EngineType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FKCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Features")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -450,7 +647,7 @@ namespace ShowroomManagmentAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Model")
+                    b.Property<string>("ModelName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -471,13 +668,51 @@ namespace ShowroomManagmentAPI.Migrations
                         .HasMaxLength(17)
                         .HasColumnType("nvarchar(17)");
 
+                    b.Property<string>("WheelCount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Year")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("VehicleId");
+                    b.HasKey("VehiicleId");
+
+                    b.HasIndex("FKCategoryId");
 
                     b.ToTable("Vehicles");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.VehicleCategory", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("VehicleCategorys");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Attendance", b =>
+                {
+                    b.HasOne("ShowroomManagmentAPI.Data.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("FKEmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.CampaignChannelMapping", b =>
@@ -518,6 +753,25 @@ namespace ShowroomManagmentAPI.Migrations
                     b.Navigation("CustomerSegment");
                 });
 
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Defects", b =>
+                {
+                    b.HasOne("ShowroomManagmentAPI.Data.Inspection", "Inspection")
+                        .WithMany()
+                        .HasForeignKey("FKInspectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShowroomManagmentAPI.Data.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inspection");
+
+                    b.Navigation("Vehicle");
+                });
+
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Employee", b =>
                 {
                     b.HasOne("ShowroomManagmentAPI.Data.Department", "Department")
@@ -535,6 +789,55 @@ namespace ShowroomManagmentAPI.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Inspection", b =>
+                {
+                    b.HasOne("ShowroomManagmentAPI.Data.Inspector", "Inspector")
+                        .WithMany()
+                        .HasForeignKey("FKInspectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShowroomManagmentAPI.Data.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inspector");
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Inspector", b =>
+                {
+                    b.HasOne("ShowroomManagmentAPI.Data.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("FkDepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.OrderItem", b =>
+                {
+                    b.HasOne("ShowroomManagmentAPI.Data.SalesOrder", "SalesOrder")
+                        .WithMany()
+                        .HasForeignKey("FkSaleOrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShowroomManagmentAPI.Data.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SalesOrder");
+
+                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Product", b =>
@@ -576,6 +879,36 @@ namespace ShowroomManagmentAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.SalesOrder", b =>
+                {
+                    b.HasOne("ShowroomManagmentAPI.Data.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("FkCustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShowroomManagmentAPI.Data.Employee", "Empolyee")
+                        .WithMany()
+                        .HasForeignKey("FkEmpolyeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Empolyee");
+                });
+
+            modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
+                {
+                    b.HasOne("ShowroomManagmentAPI.Data.VehicleCategory", "VehicleCategory")
+                        .WithMany()
+                        .HasForeignKey("FKCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VehicleCategory");
                 });
 #pragma warning restore 612, 618
         }

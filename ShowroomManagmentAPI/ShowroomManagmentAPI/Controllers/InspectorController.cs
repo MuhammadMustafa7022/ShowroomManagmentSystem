@@ -11,7 +11,7 @@ namespace ShowroomManagmentAPI.Controllers
     public class InspectorController : ControllerBase
     {
         private readonly IInspector service;
-        public InspectorController(IInspector inspector)
+        public InspectorController(IInspector service)
         {
             this.service = service;
         }

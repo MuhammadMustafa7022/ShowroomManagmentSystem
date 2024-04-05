@@ -27,6 +27,11 @@ namespace ShowroomManagmentAPI.Data
         public DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
         public DbSet<Inspector> Inspectors { get; set; }
         public DbSet<Inspection> Inspections { get; set; }
+        public DbSet<Defects> Defects { get; set; }
+        public DbSet<VehicleCategory> VehicleCategorys { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<SalesOrder> SaleOrders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
 
 

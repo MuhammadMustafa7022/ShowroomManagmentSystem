@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShowroomManagmentAPI.Data
 {
-    public class Defect
+    public class Defects
     {
         [Key]
         public int DefectId { get; set; }
