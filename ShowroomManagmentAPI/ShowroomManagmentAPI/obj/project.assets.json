@@ -2478,24 +2478,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADXSFGDFHGJK\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\icon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ShowroomManagmentSystem\\ShowroomManagmentAPI\\ShowroomManagmentAPI\\ShowroomManagmentAPI.csproj",
+      "projectUniqueName": "E:\\showroomManagmentFirst\\ShowroomManagmentSystem\\ShowroomManagmentAPI\\ShowroomManagmentAPI\\ShowroomManagmentAPI.csproj",
       "projectName": "ShowroomManagmentAPI",
-      "projectPath": "D:\\ShowroomManagmentSystem\\ShowroomManagmentAPI\\ShowroomManagmentAPI\\ShowroomManagmentAPI.csproj",
-      "packagesPath": "C:\\Users\\ADXSFGDFHGJK\\.nuget\\packages\\",
-      "outputPath": "D:\\ShowroomManagmentSystem\\ShowroomManagmentAPI\\ShowroomManagmentAPI\\obj\\",
+      "projectPath": "E:\\showroomManagmentFirst\\ShowroomManagmentSystem\\ShowroomManagmentAPI\\ShowroomManagmentAPI\\ShowroomManagmentAPI.csproj",
+      "packagesPath": "C:\\Users\\icon\\.nuget\\packages\\",
+      "outputPath": "E:\\showroomManagmentFirst\\ShowroomManagmentSystem\\ShowroomManagmentAPI\\ShowroomManagmentAPI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ADXSFGDFHGJK\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\icon\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2563,7 +2558,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

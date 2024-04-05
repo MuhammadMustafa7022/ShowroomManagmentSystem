@@ -4,6 +4,8 @@ using ShowroomManagmentAPI.Models;
 using ShowroomManagmentAPI.Models.Marketing_Promotion_Module;
 using ShowroomManagmentAPI.Models.Supplier_Module;
 using ShowroomManagmentAPI.Repositories;
+using ShowroomManagmentAPI.Models.Quality_Assurance_Module;
+using ShowroomManagmentAPI.Models.Quality_xyz_Module;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,8 @@ builder.Services.AddScoped<IPurchaseOrdr, PurchaseOrdrModel>();
 builder.Services.AddScoped<ICategory, CategoryModel>();
 builder.Services.AddScoped<IProduct, ProductModel>();
 builder.Services.AddScoped<IPurchaseOrderItem, PurchaseOrderItemModel>();
+builder.Services.AddScoped<IInspector, InspectorModel>();
+builder.Services.AddScoped<IInspection, InspectionModel>();
 
 
 
