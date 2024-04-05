@@ -43,8 +43,8 @@ namespace ShowroomManagmentAPI.Models
                 if (VehicleDTO.ProfileImagePath != null)
                 {
                     var FileName = VehicleDTO.ProfileImagePath.FileName;
-                    path = Path.Combine("Uploads",WebHostEnvironment.WebRootPath+FileName);
-                    using (Stream stream = new FileStream(path,FileMode.Create))
+                    path = Path.Combine("Uploads", WebHostEnvironment.WebRootPath + FileName);
+                    using (Stream stream = new FileStream(path, FileMode.Create))
                     {
                         await VehicleDTO.ProfileImagePath.CopyToAsync(stream);
                     }
@@ -52,7 +52,7 @@ namespace ShowroomManagmentAPI.Models
 
                 var Vehicle = new Vehicle()
                 {
-                    Model = VehicleDTO.Model,
+                    ModelName = VehicleDTO.ModelName,
                     Manufacturer = VehicleDTO.Manufacturer,
                     Year = VehicleDTO.Year,
                     Color = VehicleDTO.Color,
@@ -60,7 +60,11 @@ namespace ShowroomManagmentAPI.Models
                     VIN = VehicleDTO.VIN,
                     Price = VehicleDTO.Price,
                     Quantity = VehicleDTO.Quantity,
-                    ProfileImagePath = path
+                    Features = VehicleDTO.Features,
+                    WheelCount = VehicleDTO.WheelCount,
+                    EngineType = VehicleDTO.EngineType,
+                    ProfileImagePath = path,
+                    FKCategoryId = VehicleDTO.FKCategoryId,
                 };
 
                 await Context.Vehicles.AddAsync(Vehicle);
@@ -81,7 +85,7 @@ namespace ShowroomManagmentAPI.Models
 
             try
             {
-                var Data = await Context.Vehicles.Where(x=>x.VehicleId == Id).FirstOrDefaultAsync();
+                var Data = await Context.Vehicles.Where(x => x.VehiicleId == Id).FirstOrDefaultAsync();
                 if (Data != null)
                 {
                     Response.Response = Data;
@@ -105,9 +109,9 @@ namespace ShowroomManagmentAPI.Models
 
             try
             {
-                var Data = await Context.Vehicles.Where(x=>x.VehicleId == Id).FirstOrDefaultAsync();
+                var Data = await Context.Vehicles.Where(x => x.VehiicleId == Id).FirstOrDefaultAsync();
                 var FileName = Data.ProfileImagePath;
-                var path = Path.Combine(WebHostEnvironment.WebRootPath,FileName);
+                var path = Path.Combine(WebHostEnvironment.WebRootPath, FileName);
                 if (File.Exists(path))
                 {
                     File.Delete(path);
@@ -141,15 +145,15 @@ namespace ShowroomManagmentAPI.Models
 
             try
             {
-                var Data = await Context.Vehicles.Where(x => x.VehicleId == VehicleDTO.VehicleId).FirstOrDefaultAsync();
+                var Data = await Context.Vehicles.Where(x => x.VehiicleId == VehicleDTO.VehiicleId).FirstOrDefaultAsync();
                 if (Data != null)
                 {
                     if (VehicleDTO.ProfileImagePath != null)
                     {
                         var FileName = VehicleDTO.ProfileImagePath.FileName;
                         var path = FileName = Data.ProfileImagePath;
-                        var pathc = Path.Combine("Uploads",WebHostEnvironment.WebRootPath,FileName);
-                        using (Stream stream = new FileStream(path,FileMode.Create))
+                        var pathc = Path.Combine("Uploads", WebHostEnvironment.WebRootPath, FileName);
+                        using (Stream stream = new FileStream(path, FileMode.Create))
                         {
                             await VehicleDTO.ProfileImagePath.CopyToAsync(stream);
                         }
@@ -158,14 +162,19 @@ namespace ShowroomManagmentAPI.Models
 
                 var Vehicle = new Vehicle()
                 {
-                    Model = VehicleDTO.Model,
+                    VehiicleId = VehicleDTO.VehiicleId,
+                    ModelName = VehicleDTO.ModelName,
                     Manufacturer = VehicleDTO.Manufacturer,
                     Year = VehicleDTO.Year,
                     Color = VehicleDTO.Color,
                     Mileage = VehicleDTO.Mileage,
                     VIN = VehicleDTO.VIN,
                     Price = VehicleDTO.Price,
-                    Quantity = VehicleDTO.Quantity
+                    Quantity = VehicleDTO.Quantity,
+                    Features = VehicleDTO.Features,
+                    WheelCount = VehicleDTO.WheelCount,
+                    EngineType = VehicleDTO.EngineType,
+                    FKCategoryId = VehicleDTO.FKCategoryId,
                 };
 
                 Context.Vehicles.Update(Vehicle);

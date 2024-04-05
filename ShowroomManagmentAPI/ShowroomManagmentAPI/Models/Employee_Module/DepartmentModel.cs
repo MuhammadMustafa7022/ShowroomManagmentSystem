@@ -25,7 +25,6 @@ namespace ShowroomManagmentAPI.Models
             }
             return ResponseDTO;
         }
-
         public async Task<ResponseDTO> AddDepartment(DepartmentDTO departmentDTO)
         {
             var ResponseDTO = new ResponseDTO();
@@ -46,7 +45,6 @@ namespace ShowroomManagmentAPI.Models
             }
             return ResponseDTO;
         }
-
         public async Task<ResponseDTO> DeleteDepartment(int Id)
         {
             var ResponseDTO = new ResponseDTO();
@@ -70,7 +68,6 @@ namespace ShowroomManagmentAPI.Models
             }
             return ResponseDTO;
         }
-
         public async Task<ResponseDTO> GetDepartmentById(int Id)
         {
             var ResponseDTO = new ResponseDTO();
@@ -92,20 +89,11 @@ namespace ShowroomManagmentAPI.Models
             }
             return ResponseDTO;
         }
-
         public async Task<ResponseDTO> UpdateDepartment(DepartmentDTO departmentDTO)
         {
             var ResponseDTO = new ResponseDTO();
             try
             {
-                //var data = await context.Departments.Where(x => x.PkId == departmentDTO.Id).FirstOrDefaultAsync();
-                //if(data != null)
-                //{
-                //}
-                //else
-                //{
-                //    ResponseDTO.StatusCode = 404;
-                //}
                     var department = new Department()
                     {
                     PkId = departmentDTO.PkId,
@@ -125,4 +113,3 @@ namespace ShowroomManagmentAPI.Models
         }
     }
 }
-
