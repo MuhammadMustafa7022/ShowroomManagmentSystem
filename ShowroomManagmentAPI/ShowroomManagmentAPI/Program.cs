@@ -45,6 +45,52 @@ builder.Services.AddScoped<ISaleOrder, SalesOrderModel>();
 builder.Services.AddScoped<IOrderItem, OrderItemModel>();
 builder.Services.AddScoped<IDefect, DefectModel>();
 
+// Nabell working
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // Ubaid Working
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// mustafa working
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

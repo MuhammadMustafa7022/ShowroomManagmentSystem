@@ -33,6 +33,70 @@ namespace ShowroomManagmentAPI.Data
         public DbSet<SalesOrder> SaleOrders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
 
+        // Nabeel working
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // ubaid working
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // mustafa working
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
