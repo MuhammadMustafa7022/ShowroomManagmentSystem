@@ -10,6 +10,7 @@ using ShowroomManagmentAPI.Models.Employee_Module;
 using ShowroomManagmentAPI.Models.Sales_Managment_Module;
 using ShowroomManagmentAPI.Models.Tax_Configuration_Module;
 using ShowroomManagmentAPI.Models.Transaction_Module;
+using ShowroomManagmentAPI.Models.Service_Managment_Module;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,6 +86,10 @@ builder.Services.AddScoped<ITaxRates,TaxRatesModel>();
 builder.Services.AddScoped<ITaxExemption, TaxExemptionModel>();
 builder.Services.AddScoped<ITaxRule,TaxRuleModel>();
 builder.Services.AddScoped<ITransaction,TransactionModel>();
+builder.Services.AddScoped<IServiceAppointment,ServiceAppointmentModel>();
+builder.Services.AddScoped<IServiceType,ServiceTypeModel>();
+builder.Services.AddScoped<IServiceRecord,ServiceRecordModel>();
+
 
 
 

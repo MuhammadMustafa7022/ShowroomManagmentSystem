@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowroomManagmentAPI.Data;
 
@@ -11,9 +12,10 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240412221353_InitilizeServiceAppointment")]
+    partial class InitilizeServiceAppointment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -621,53 +623,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("ServiceAppointments");
                 });
 
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.ServiceRecord", b =>
-                {
-                    b.Property<int>("PkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FKServiceAppointmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FKServiceTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ServiceDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PkId");
-
-                    b.HasIndex("FKServiceAppointmentId");
-
-                    b.HasIndex("FKServiceTypeId");
-
-                    b.ToTable("ServiceRecords");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.ServiceType", b =>
-                {
-                    b.Property<int>("PkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
-
-                    b.Property<bool>("TypeName")
-                        .HasColumnType("bit");
-
-                    b.HasKey("PkId");
-
-                    b.ToTable("ServiceTypes");
-                });
-
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Supplier", b =>
                 {
                     b.Property<int>("SupplierId")
@@ -1159,25 +1114,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Vehicle");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.ServiceRecord", b =>
-                {
-                    b.HasOne("ShowroomManagmentAPI.Data.ServiceAppointment", "ServiceAppointment")
-                        .WithMany()
-                        .HasForeignKey("FKServiceAppointmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShowroomManagmentAPI.Data.ServiceType", "ServiceType")
-                        .WithMany()
-                        .HasForeignKey("FKServiceTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ServiceAppointment");
-
-                    b.Navigation("ServiceType");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.TaxRule", b =>

@@ -91,6 +91,12 @@ namespace ShowroomManagmentAPI.Data
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<ServiceAppointment> ServiceAppointments { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
+        public DbSet<ServiceRecord> ServiceRecords { get; set; }
+
+
+
 
 
 
