@@ -89,6 +89,7 @@ namespace ShowroomManagmentAPI.Data
 
         public DbSet<Transaction> Transactions { get; set; }
 
+        public DbSet<User> Users { get; set; }
 
 
 
