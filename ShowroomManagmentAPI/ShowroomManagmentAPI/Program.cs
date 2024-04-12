@@ -8,6 +8,7 @@ using ShowroomManagmentAPI.Models.Quality_Assurance_Module;
 using ShowroomManagmentAPI.Models.Quality_xyz_Module;
 using ShowroomManagmentAPI.Models.Employee_Module;
 using ShowroomManagmentAPI.Models.Sales_Managment_Module;
+using ShowroomManagmentAPI.Models.Tax_Configuration_Module;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,7 +60,7 @@ builder.Services.AddScoped<IDefect, DefectModel>();
 
 
 
- // Ubaid Working
+// Ubaid Working
 
 
 
@@ -79,6 +80,9 @@ builder.Services.AddScoped<IDefect, DefectModel>();
 
 
 
+builder.Services.AddScoped<ITaxRates,TaxRatesModel>();
+builder.Services.AddScoped<ITaxExemption, TaxExemptionModel>();
+builder.Services.AddScoped<ITaxRule,TaxRuleModel>();
 
 
 

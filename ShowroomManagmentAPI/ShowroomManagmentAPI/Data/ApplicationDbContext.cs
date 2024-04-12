@@ -83,6 +83,9 @@ namespace ShowroomManagmentAPI.Data
 
 
 
+        public DbSet<TaxRate> TaxRates { get; set; }
+        public DbSet<TaxExemption> TaxExemptions { get; set; }
+        public DbSet<TaxRule> TaxRules { get; set; }
 
 
 

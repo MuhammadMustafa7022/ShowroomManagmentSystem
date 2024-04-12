@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowroomManagmentAPI.Data;
 
@@ -11,9 +12,10 @@ using ShowroomManagmentAPI.Data;
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240411132518_InitilizeTaxDate")]
+    partial class InitilizeTaxDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -614,38 +616,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.TaxExemption", b =>
-                {
-                    b.Property<int>("PkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
-
-                    b.Property<string>("ApplicableProduct")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EffectiveDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EndDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("ExemptionType")
-                        .HasColumnType("bit");
-
-                    b.HasKey("PkId");
-
-                    b.ToTable("TaxExemptions");
-                });
-
             modelBuilder.Entity("ShowroomManagmentAPI.Data.TaxRate", b =>
                 {
                     b.Property<int>("PkId")
@@ -676,37 +646,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.HasKey("PkId");
 
                     b.ToTable("TaxRates");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.TaxRule", b =>
-                {
-                    b.Property<int>("PkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"), 1L, 1);
-
-                    b.Property<string>("ApplicableProduct")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FKTaxExemption")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FKTaxRateId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PkId");
-
-                    b.HasIndex("FKTaxExemption");
-
-                    b.HasIndex("FKTaxRateId");
-
-                    b.ToTable("TaxRules");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
@@ -991,25 +930,6 @@ namespace ShowroomManagmentAPI.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Empolyee");
-                });
-
-            modelBuilder.Entity("ShowroomManagmentAPI.Data.TaxRule", b =>
-                {
-                    b.HasOne("ShowroomManagmentAPI.Data.TaxExemption", "TaxExemption")
-                        .WithMany()
-                        .HasForeignKey("FKTaxExemption")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShowroomManagmentAPI.Data.TaxRate", "TaxRate")
-                        .WithMany()
-                        .HasForeignKey("FKTaxRateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TaxExemption");
-
-                    b.Navigation("TaxRate");
                 });
 
             modelBuilder.Entity("ShowroomManagmentAPI.Data.Vehicle", b =>
