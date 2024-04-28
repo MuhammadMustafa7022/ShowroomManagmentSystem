@@ -18,11 +18,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(x => 
                  x.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+builder.Services.AddCors(x => x.AddPolicy(MyAllowSpecificOrigins, policy => {
+    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+}));
+
 
 builder.Services.AddScoped<IDepartment, DepartmentModel>();
 builder.Services.AddScoped<IRole, RoleModel>();
@@ -119,7 +125,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 
 app.MapControllers();
