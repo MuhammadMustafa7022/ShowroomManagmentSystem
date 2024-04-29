@@ -16,8 +16,9 @@ constructor(private apidepartment:DepartmentService) {}
 
   ngOnInit(): void {
    this.apidepartment.getDepartment().subscribe((response:any) =>{
-    console.log(response);
-    this.alldepartment = response;
+    console.log(response.Response);
+    this.alldepartment = response.Response;
+    console.log(this.alldepartment);      
    } )
 
   }

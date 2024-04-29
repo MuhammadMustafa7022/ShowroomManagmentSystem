@@ -4,12 +4,18 @@
 
 <div class="col-md-12 mt-5">
   <div class="white_shd full margin_bottom_30">
-     <div class="full graph_head d-flex">
-        <div class="heading1 margin_0">
-           <h2>Department Tables</h2>
+     <div class="full graph_head ">
+        <div class="heading1 margin_0 d-flex">
+         <div class="row">
+            <div class="col-md-10">
+               <h2>Department Tables</h2>
+            </div>
+            <div class="col-md-2">
+               <a type="button" class="btn btn-info" style="margin-left: 250px;" data-toggle="modal" data-target="#exampleModalCenter" >Add Department</a>
+            </div>
+         </div>
         </div>
-        <a type="button" class="btn btn-info">Add Department</a>
-     </div>
+      </div>
      <div class="table_section padding_infor_info">
         <div class="table-responsive-sm">
            <table class="table">
@@ -23,10 +29,10 @@
                  </tr>
               </thead>
               <tbody>
-                 <tr>
-                    <td>1</td>
-                    <td>Anna</td>
-                    <td>Anna descr</td>
+                 <tr *ngFor="let department of alldepartment">
+                    <td>{{department.PkId}}</td>
+                    <td>{{department.Name}}</td>
+                    <td>{{department.Description}}</td>
                     <td>
                       <a type="button" class="btn btn-info text-white mr-3" >Edit</a>
 
@@ -42,3 +48,35 @@
 </div>
 </div>
 </div>
+
+
+<!-- insert data in modal --> 
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <form >
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Name</label>
+              <input type="text" class="form-control" required id="exampleFormControlInput1" placeholder="Department Name">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Description</label>
+              <textarea class="form-control" placeholder="Optional" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </form>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary">Save changes</button>
+       </div>
+     </div>
+   </div>
+ </div>
