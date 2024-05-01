@@ -21,14 +21,15 @@ constructor(public apidepartment:DepartmentService) {}
    this.alldepartment = response.Response;
    });
   }
-  
-  
+
+
+
   EditDepartment(SelectedDepartment:Department)
   {
-    console.log(SelectedDepartment);
     this.apidepartment.DepartmentData = SelectedDepartment;
+
   }
-  
+
   DeleteDepartment(Id:number)
   {
     if(confirm('Are You Really Want To Delete This Record?'))
@@ -50,7 +51,7 @@ constructor(public apidepartment:DepartmentService) {}
 
   Submit(form:NgForm)
   {
-    if(this.apidepartment.DepartmentData.id == 0)
+    if(this.apidepartment.DepartmentData.PkId == 0)
       {
         this.InsertDepartment(form);
       }
