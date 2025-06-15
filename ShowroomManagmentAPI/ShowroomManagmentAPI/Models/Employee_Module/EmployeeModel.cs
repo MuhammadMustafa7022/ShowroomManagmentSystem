@@ -131,16 +131,15 @@ namespace ShowroomManagmentAPI.Models
             var ResponseDTO = new ResponseDTO();
             try
             {
-                var path = "";
-                var pathc = "";
                 var data = await context.Employees.Where(x=>x.PkId==employeeDTO.PkId).FirstOrDefaultAsync();
                 if (data != null)
                 {
                     if (employeeDTO.ProfileImagePath != null)
                     {
                         var FileName = employeeDTO.ProfileImagePath.FileName;
-                        path = FileName  = data.ProfileImagePath;
-                        pathc = Path.Combine("Uploads",webHostEnvironment.WebRootPath + FileName);
+                        var path = FileName  = data.ProfileImagePath;
+                        var removeimagepath = path.Remove(0, 8);
+                        var pathc = Path.Combine("Uploads",webHostEnvironment.WebRootPath + removeimagepath);
                         using (Stream stream = new FileStream(path, FileMode.Create))
                         {
                             await employeeDTO.ProfileImagePath.CopyToAsync(stream);
@@ -152,12 +151,12 @@ namespace ShowroomManagmentAPI.Models
                 {
                     PkId = employeeDTO.PkId,
                     Name = employeeDTO.Name,
-                    Email = employeeDTO.Email,
+                    Email = employeeDTO.Email,  
                     Cnic = employeeDTO.Cnic,
                     Address = employeeDTO.Address,
                     ContactNumber = employeeDTO.ContactNumber,
                     FKDepartment = employeeDTO.FKDepartment,
-                    FKRole = employeeDTO.FKRole,
+                    FKRole = employeeDTO.FKRole
                 };
                 context.Employees.Update(Employee);
                 await context.SaveChangesAsync();

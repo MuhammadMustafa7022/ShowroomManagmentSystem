@@ -6,8 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowroomManagmentAPI.Data;
 
-#nullable disable
-
 namespace ShowroomManagmentAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]

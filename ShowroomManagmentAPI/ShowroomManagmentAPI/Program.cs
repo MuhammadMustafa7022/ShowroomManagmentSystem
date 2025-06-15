@@ -88,6 +88,7 @@ builder.Services.AddScoped<IDefect, DefectModel>();
 
 
 
+
 builder.Services.AddScoped<ITaxRates,TaxRatesModel>();
 builder.Services.AddScoped<ITaxExemption, TaxExemptionModel>();
 builder.Services.AddScoped<ITaxRule,TaxRuleModel>();

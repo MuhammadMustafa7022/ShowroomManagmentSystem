@@ -7,6 +7,7 @@ import { Department } from '../shared/department.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DepartmentService { 
   private apiUrl = environment.apiUrl;
   constructor(private client:HttpClient) { }
